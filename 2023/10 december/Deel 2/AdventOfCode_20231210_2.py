@@ -1,5 +1,5 @@
-data_bestand = open("10 december/Data/Input_20231210.txt")
-#data_bestand = open("10 december/Data/Input_test.txt")
+#data_bestand = open("10 december/Data/Input_20231210.txt")
+data_bestand = open("10 december/Data/Input_test.txt")
 data = data_bestand.read().split('\n') # Use split on \n instead of readlines(). This makes th \n dissapear 
 #print(data)
 
@@ -79,10 +79,12 @@ def validDirection(currentPoint, nextDir, prevDir):
         return False
 
 highLengthLoop = 0
+highPath = []
 
 for direction in directions:
     sContinue = 1
     totalLengthLoop = 0
+    path = []
 
     currentPoint = startPoint
     nextDir = direction # Direction point is going to
@@ -94,7 +96,8 @@ for direction in directions:
             break
 
         totalLengthLoop += 1
-#        print(currentPoint)
+        path.append(currentPoint)
+#        print(path)
 
         currentPoint = nextPoint(currentPoint, nextDir)
 
@@ -107,8 +110,10 @@ for direction in directions:
     
     if totalLengthLoop > highLengthLoop:
         highLengthLoop = totalLengthLoop
+        highPath = path
 
 #    print(totalLengthLoop)
 #    print(highLengthLoop)
 
 print("Answer = " + str(round(highLengthLoop / 2)))
+print(highPath)
